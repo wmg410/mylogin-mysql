@@ -23,10 +23,17 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    //这里可以设置哪些文件类型可以不带后缀
+    extensions: ['.js', '.vue', '.json','.css'],
     alias: {
+      //这个地方一定要加 打包的时候找.vue文件方便使用
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
+      //根据自己的需求 起一些文件的别名 方便调用
+      'router':resolve('src/router'),
+      'pages':resolve('src/pages'),
+      'components':resolve('src/components'),
+      'assets':resolve('src/assets')
     }
   },
   module: {
