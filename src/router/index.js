@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//这种是默认的加载组件的方式 所有的组件都会被扔到app.js这个文件中 当组件过多的时候 app文件就会过大 所以呢 推荐使用require.ensure路由懒加载
+//这种是默认的加载组件的方式 ，所有的组件都会被扔到app.js这个文件中， 当组件过多的时候， app文件就会非常大。 所以呢 推荐使用require.ensure路由懒加载
 
 const Login = resolve=>{
         require.ensure(['pages/Login.vue'],()=>{
@@ -32,11 +32,9 @@ const Error = resolve=>{
 // import Register from 'pages/Register'
 // import Error from 'pages/404'
 
-
-
-
 //让路由规则生效
 Vue.use(Router)
+
 //暴露了一个路由对象
 export default new Router({
   //去掉访问的时候的/#这个动态参数
