@@ -34,6 +34,8 @@
 </template>
 
 <script>
+    // 引入request发请求的axios实例
+    import request from '@/utils/request'
     export default {
       name: "Register",
       data(){
@@ -103,7 +105,25 @@
           this.$refs[formName].validate((valid)=>{
             if(valid){
               // 验证成功之后，再进行发送请求
-
+              request({
+                url:'/api/register',
+                method:'post',
+                data:this.regForm
+              }).then(({data})=>{
+                let success = data.success; // 成功与否的布尔值
+                let message = data.message;
+                let userInfo = data.data;  // 用户信息
+                if(success){
+                  // 成功后跳转
+                  this.$router.push('/login');
+                }else{
+                  // 失败后给出错误信息
+                  this.$message.success(message);
+                }
+                // console.log(data);
+              }).catch(err=>{
+                console.log(err);
+              })
             }else {
               // console.log('验证失败');
               return false;

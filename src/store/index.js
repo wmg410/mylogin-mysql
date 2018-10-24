@@ -2,7 +2,7 @@
 // 简单的理解的话：组件和组件之间是无法做到相互的共享数据的，必须通过prop/emit来传值
 // 我们通过vuex可以添加一些全局的共享数据或者是共享方法，可以在任何组件中使用它
 
-import vuex from 'vuex'
+import Vuex from 'vuex'
 import Vue from 'vue'
 // 2.分别引入对应的文件
 import state from './state'

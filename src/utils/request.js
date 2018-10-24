@@ -3,9 +3,9 @@ import axios from 'axios'
 // 消息提示的组件
 import { Message } from 'element-ui'
 // vuex状态管理
-import store from '@/story'
+import store from '@/store'
 // 获取token的方法
-import { getToken } from '@/utils/auth'
+// import { getToken } from '@/utils/auth'
 
 // 全局发送post请求的默认头部content-type类型，定义类型为JSON格式，并且字符串编码为utf-8
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
@@ -13,7 +13,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 // 1.首先创建一个axios实例，进行请求的一些全局配置
 const service = axios.create({
   // 请求默认发送的主机地址
-  baseURL:'http://localhost:3000',
+  // baseURL:'http://localhost:3000',
   // 请求的过期时间
   timeout:5000
 })
