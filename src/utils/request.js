@@ -6,7 +6,7 @@ import { Message } from 'element-ui'
 import store from '@/store'
 // 获取token的方法
 // import { getToken } from '@/utils/auth'
-
+import router from '@/router'
 // 全局发送post请求的默认头部content-type类型，定义类型为JSON格式，并且字符串编码为utf-8
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
 
@@ -19,10 +19,9 @@ const service = axios.create({
 })
 
 // 请求发送之前的一个拦截器
-service.interceptors.request.use(
-  config=>{
+service.interceptors.request.use(config=>{
     if(store.state.token){
-      config.headers['X-Token'] = store.state.token()   // 访问全局变量下的token值
+      config.headers['X-Token'] = store.state.token   // 访问全局变量下的token值
     }
     return config
   }, error=> {
@@ -32,16 +31,23 @@ service.interceptors.request.use(
 )
 
 // 请求发送后数据返回时候的拦截器
+// response拦截器
 service.interceptors.response.use(
-  response=>response,
-  error => {
-    console.log('err' + error)
-    Message({
-      message:error.message,
-      type:'error',
-      duration:5 * 1000
-    })
-    return Promise.reject(error)
+  response => {
+    return response;
+  },
+  error => { //默认除了2XX之外的都是错误的，就会走这里
+    if(error.response){
+      switch(error.response.status){
+        case 401:
+          store.dispatch('UserLogout'); //可能是token过期，清除它
+          router.replace({ //跳转到登录页面
+            path: 'login'
+          });
+      }
+    }
+    return Promise.reject(error.response);
   }
-)
+);
+
 export default service

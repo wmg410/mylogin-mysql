@@ -103,7 +103,7 @@
         // 发送表单数据
         submitForm:function (formName) {
           this.$refs[formName].validate((valid)=>{
-            if(valid){
+              if(valid){
               // 验证成功之后，再进行发送请求
               request({
                 url:'/api/register',
